@@ -6,4 +6,4 @@ Currently contains configurations for
 
 To use on unix systems
 1. run `git clone git@github.com:cbunt/dotfiles.git ~/.config`
-2. add `ZDOTDIR="~/.config/zsh` to your enviroment
+2. add `ZDOTDIR="~/.config/zsh"` to your enviroment
