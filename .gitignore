@@ -1,10 +1,6 @@
 /*
 
 !.gitignore
-!.zshrc
-
-!/.config
-/.config/*
-
-!/.config/emacs/*
-!/.config/starship/*
+!README.md
+!/zsh
+!/starship
