@@ -1,0 +1,148 @@
+add_newline = false
+
+format = """
+
+[ ](fg:blue)\
+[ $directory ](fg:black bg:blue)\
+[](fg:blue bg:14)\
+[$jobs](bg:14 fg:black)\
+[](fg:14 bg:13)\
+[\
+$c\
+$elixir\
+$elm\
+$golang\
+$haskell\
+$java\
+$julia\
+$nodejs\
+$nim\
+$rust\
+](fg:black bg:13)\
+[](fg:13 bg:11)\
+[$git_branch$git_status](bg:11 fg:black)\
+[](fg:11 bg:8)\
+[ $time](bg:8 fg:15)\
+$character\
+$fill\
+$cmd_duration 
+   [~ ](fg:14)
+"""
+
+continuation_prompt = "   [~ ](fg:14)"
+
+[profiles]
+short = """
+[ ](fg:blue)\
+[ $directory ](bg:blue fg:black)\
+[](fg:blue bg:8)\
+[ $time](fg:15 bg:8)\
+$character
+"""
+
+multi_short = """
+
+[ ](fg:blue)\
+[ $directory ](bg:blue fg:black)\
+[](fg:blue bg:8)\
+[ $time](fg:15 bg:8)\
+$character
+   [~ ](fg:14)
+"""
+
+rshort = "$cmd_duration"
+
+[character]
+success_symbol = "[ ](bg:8)[](fg:8)"
+error_symbol = "[](fg:8 bg:red)[](fg:red)"
+
+[directory]
+format = "$path"
+truncation_length = 3
+truncate_to_repo = true
+truncation_symbol = "🌱/"
+home_symbol = "🏡"
+
+[directory.substitutions]
+"/workspaces" = " / 🌺 "
+
+[c]
+symbol = " "
+format = ' $symbol ($version) '
+
+[cmd_duration]
+format = """
+[](fg:15)\
+[$duration](bg:15 fg:0)\
+[](fg:15)\
+"""
+
+[docker_context]
+symbol = " "
+style = "bg:#06969A"
+format = '[ $symbol $context ]($style) $path'
+
+[elixir]
+symbol = " "
+style = "bg:#06969A"
+format = '[ $symbol ($version) ]($style)'
+
+[elm]
+symbol = " "
+style = "bg:#06969A"
+format = '[ $symbol ($version) ]($style)'
+
+[fill]
+symbol = ' '
+
+[git_branch]
+symbol = ""
+format = ' $symbol $branch '
+
+[git_status]
+format = '($all_status$ahead_behind )'
+
+[golang]
+symbol = " "
+style = "bg:#06969A"
+format = '[ $symbol ($version) ]($style)'
+
+[haskell]
+symbol = " "
+style = "bg:#06969A"
+format = '[ $symbol ($version) ]($style)'
+
+[java]
+symbol = " "
+style = "bg:#06969A"
+format = '[ $symbol ($version) ]($style)'
+
+[jobs]
+symbol = "🐎"
+format = " ($number )$symbol "
+symbol_threshold = 1
+
+[julia]
+symbol = " "
+style = "bg:#06969A"
+format = '[ $symbol ($version) ]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:#06969A"
+format = '[ $symbol ($version) ]($style)'
+
+[nim]
+symbol = " "
+style = "bg:#06969A"
+format = '[ $symbol ($version) ]($style)'
+
+[rust]
+symbol = ""
+style = "bg:#06969A"
+format = '[ $symbol ($version) ]($style)'
+
+[time]
+disabled = false
+time_format = "%-I:%m%P" # Hour:Minute Format
+format = '$time'

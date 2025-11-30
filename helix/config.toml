@@ -1,0 +1,42 @@
+theme = "onedark"
+
+[editor]
+bufferline = "multiple"
+color-modes = true
+true-color = true
+
+[editor.auto-save]
+focus-lost = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.statusline]
+center = [
+  "read-only-indicator",
+  "file-modification-indicator",
+  "file-name",
+  "spacer",
+  "version-control"
+]
+left = [
+  "mode",
+  "file-type",
+  "diagnostics",
+  "spinner"
+]
+right = [
+  "selections",
+  "register",
+  "position",
+  "total-line-numbers"
+]
+
+[keys.normal]
+";" = "command_mode"
+":" = "collapse_selection"
+A-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+A-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
+A-q = ":toggle lsp.display-inlay-hints"

@@ -1,0 +1,14 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:toggle-pane"
+rev = "eaf6920"
+hash = "8a7c58225816a163a6e8730c0adafbc8"
+
+[[plugin.deps]]
+use = "Rolv-Apneseth/starship"
+rev = "a63550b"
+hash = "c2021386289a0cbb3e152a052f67c177"
+
+[[flavor.deps]]
+use = "damjee/onedark"
+rev = "8a7796c"
+hash = "9f747d6c6a5f3a8a1d39a6445463c335"

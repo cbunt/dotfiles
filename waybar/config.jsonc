@@ -1,0 +1,37 @@
+// -*- mode: jsonc -*-
+{
+  "height": 24,
+  "spacing": 4,
+  "modules-left": [
+    "clock",
+  ],
+  "modules-center": [
+    "sway/mode",
+    "sway/workspaces" 
+  ],
+  "modules-right": [
+    "network",
+    "battery",
+  ],
+  "clock": {
+    "format": "{:%I:%M%p  %a %b %d}",
+    "tooltip": false,
+  },
+  "battery": {
+    "states": { "warning": 30, "critical": 15 },
+    "format-charging": "🔌 {capacity}%",
+    "format-full": "⚡ {capacity}%",
+    "format": "{icon} {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+  },
+  "sway/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{icon}",
+    "format-icons": {
+        "urgent": "🌗",
+        "focused": "🌕",
+        "default": "🌑",
+    }
+  }
+}

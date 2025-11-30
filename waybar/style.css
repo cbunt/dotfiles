@@ -1,0 +1,16 @@
+#waybar > box {
+    padding: 1ex 2ex;
+}
+
+window#waybar {
+    font-family: inherit;
+    /* background: @theme_base_color; */
+    background: #0A102E;
+    border-bottom: 1px solid @unfocused_borders;
+    /* color: @theme_text_color; */
+    color: #DBE4FF;
+}
+
+#workspaces button {
+    padding: 0 0.5ex;
+}

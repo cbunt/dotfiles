@@ -1,0 +1,14 @@
+*    
+!*/
+!.gitignore
+!README.md
+
+!foot/**/*
+!helix/**/*
+!most/**/*
+!starship/*
+!sway/**/*
+!waybar/**/*
+!yazi/**/*
+!zsh/**/*
+zsh/.zcompdump
