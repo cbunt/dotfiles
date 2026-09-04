@@ -1,3 +1,7 @@
 [[mgr.prepend_keymap]]
 on = ["<C-1>"]
 run = "plugin toggle-pane min-parent"
+
+[[mgr.prepend_keymap]]
+on = ["<C-2>"]
+run = "plugin toggle-pane min-preview"

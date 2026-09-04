@@ -1,0 +1,49 @@
+[language-server.eslint-lsp]
+command = "vscode-eslint-language-server"
+args = ["--stdio"]
+
+[language-server.eslint-lsp.config]
+run = "onType"
+validate = "on"
+rulesCustomizations = []
+nodePath = ""
+codeActionsOnSave = { mode = "all", "source.fixAll.eslint" = true }
+format = { enable = true }
+experimental = { useFlatConfig = true } # THIS is the line I mentioned above.
+problems = { shortenToSingleLine = false }
+workingDirectory = { mode = "location" }
+packageManager = "pnpm"
+
+[language-server.eslint-lsp.config.codeAction]
+disableRuleComment = { enable = true, location = "separateLine" }
+showDocumentation = { enable = true }
+
+[[language]]
+name = "javascript"
+roots = ["package.json"]
+language-servers = ["typescript-language-server", "eslint-lsp"]
+auto-format = false
+# formatter = { command = 'pnpm', args = ['eslint', '--fix', '--stdin', '--stind-filename js.js'] }
+
+[[language]]
+name = "typescript"
+roots = ["package.json"]
+language-servers = ["typescript-language-server", "eslint-lsp"]
+auto-format = false
+# formatter = { command = "pnpm", args = ['eslint', '--fix', '--stdin', '--stdin-filename ts.ts'] }
+
+[[language]]
+name = "tsx"
+roots = ["package.json"]
+language-servers = ["typescript-language-server", "eslint-lsp"]
+auto-format = false
+# formatter = { command = 'pnpm', args = ['eslint', '--fix', '--stdin', '--stdin-filename tsx.tsx'] }
+
+[[language]]
+name = "jsx"
+roots = ["package.json"]
+language-servers = ["typescript-language-server", "eslint-lsp"]
+auto-format = false
+# formatter = { command = 'pnpm', args = ['eslint', '--fix', '--stdin', '--stdin-filename jsx.jsx'] }
+
+

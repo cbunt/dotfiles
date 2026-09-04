@@ -5,6 +5,7 @@
 
 !foot/**/*
 !helix/**/*
+helix/runtime
 !most/**/*
 !starship/*
 !sway/**/*
@@ -12,3 +13,4 @@
 !yazi/**/*
 !zsh/**/*
 zsh/.zcompdump
+zsh/.zsh_history
