@@ -14,7 +14,7 @@ then
     return
 fi
 
-
+# macos or linux config difference
 if [ -x "$(command -v dircolors)" ]; then
     eval "$(dircolors)"
 fi
@@ -29,6 +29,7 @@ else
     export ZSH_PLUGIN_DIR="/usr/share/zsh/plugins"
 fi
 
+# completions
 # zstyle ':completion:*:matches'         group 'yes'
 # zstyle ':completion:*'                 group-name ''
 zstyle ':completion:*' menu select
@@ -40,27 +41,6 @@ autoload -Uz compinit
 compinit
 
 setopt globdots
-
-zle_eval() {
-    echo -en "\e[2K\r]"
-    eval "$@"
-    zle redisplay
-}
-
-zle_fg() {
-    zle_eval fg
-}
-
-# external utilities
-yy() {
-    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" 
-    yazi "$@" --cwd-file="$tmp"
-    IFS= read -r -d '' cwd < "$tmp"
-    if [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-        builtin cd -- "$cwd"
-    fi
-    rm -f -- "$tmp"
-}
 
 # starship
 if [ ! $(tty | grep tty) ] && [ -x "$(command -v starship)" ]; then
@@ -81,9 +61,29 @@ elif [ -x "$(command -v hx)"]; then
     export EDITOR=hx
 fi
 
-zle -N zle_fg
+# external utilities
+yy() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" 
+    yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd < "$tmp"
+    if [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}
 
+# fg hotkey
+zle_eval() {
+    echo -en "\e[2K\r]"
+    eval "$@"
+    zle redisplay
+}
+
+zle_fg() { zle_eval fg }
+zle -N zle_fg
 bindkey "^z" zle_fg
+
+# keybinds
 bindkey "^[J" down-line-or-history
 bindkey "^[K" up-line-or-history
 
