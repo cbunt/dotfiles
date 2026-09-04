@@ -62,15 +62,41 @@ elif [ -x "$(command -v hx)"]; then
 fi
 
 # external utilities
-yy() {
-    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" 
-    yazi "$@" --cwd-file="$tmp"
-    IFS= read -r -d '' cwd < "$tmp"
-    if [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-        builtin cd -- "$cwd"
-    fi
-    rm -f -- "$tmp"
-}
+if [ -x "$(command -v yazi)" ]; then
+    yy() {
+        local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" 
+        yazi "$@" --cwd-file="$tmp"
+        IFS= read -r -d '' cwd < "$tmp"
+        if [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+            builtin cd -- "$cwd"
+        fi
+        rm -f -- "$tmp"
+    }
+fi
+
+if [ -x "$(command -v fzf)" ]; then
+    source <(fzf --zsh)
+
+    export FZF_COMPLETION_TRIGGER=''
+    bindkey '^t' fzf-completion
+
+    export FZF_DEFAULT_OPTS=$'--style=minimal
+      --padding=1
+      --info=inline
+      --border
+      --color=fg:#abb2bf,bg:#282c34,hl:#c678dd,fg+:#ffffff,bg+:#4b5263
+      --color=hl+:#e5c07b,info:#98c379,prompt:#61afef,pointer:#e06c75
+      --color=marker:#d87c73,spinner:#61afef,header:#61afef,border:#5c6370
+      --color=gutter:#4b5263'
+    
+    export FZF_COMPLETION_OPTS=$FZF_DEFAULT_OPTS
+      
+    _fzf_complete_umu-run() {
+      _fzf_complete -- "$@" < <(
+          find ~/Games -name "*.exe" ! -wholename "*/drive_c/*" ! -wholename "*/umu/*" ! -wholename "*/.utils/*" ! -wholename "*/UnityCrashHandler64.exe"
+      )
+    }
+fi
 
 # fg hotkey
 zle_eval() {
@@ -118,7 +144,6 @@ ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste up-line-or-search down-line-or-s
 
 # highlighting
 source $ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source <(fzf --zsh)
 
 # start routine
 clear
