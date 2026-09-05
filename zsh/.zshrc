@@ -104,6 +104,51 @@ if [ -x "$(command -v fzf)" ]; then
               ! -name "UnityCrashHandler64.exe"
       )
     }
+
+    source $ZSH_PLUGIN_DIR/fzf-tab/fzf-tab.plugin.zsh
+    zstyle ':fzf-tab:*' use-fzf-default-opts yes
+
+    export FZF_COMPLETION_TRIGGER='**'
+    bindkey '^t' fzf-completion
+fi
+
+if [ -x "$(command -v umu-run)" ]; then
+    umu-make() {
+        local app=$1
+        local type=${app#*.}
+
+        if [[ $type != "exe" ]]; then;
+            echo "error: invalid file type \"${type}\""
+            return
+        fi
+
+        local abs_path=$(realpath "$app")
+        local name=${${app:0:(-4)}##*/}
+
+        if [[ ! ( -f $abs_path ) ]]; then
+            echo "error: file does not exist"
+            return
+        fi
+
+        local shortcut=$(realpath ~/.local/share/applications/"$name".desktop)
+
+        if [[ -f $shortcut ]]; then
+            echo "error: desktop file already exists"
+            return
+        fi
+
+        local icon=$(realpath ~/.local/share/applications/icons/"$name".ico)
+        icoextract $abs_path $icon
+
+        cat << EOF > $shortcut
+[Desktop Entry]
+Categories=Games
+Exec=umu-run ${abs_path}
+Name=${name}
+Type=Application
+Icon=${icon}
+EOF
+    }
 fi
 
 # fg hotkey
