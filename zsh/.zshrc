@@ -93,7 +93,11 @@ if [ -x "$(command -v fzf)" ]; then
       
     _fzf_complete_umu-run() {
       _fzf_complete -- "$@" < <(
-          find ~/Games -name "*.exe" ! -wholename "*/drive_c/*" ! -wholename "*/umu/*" ! -wholename "*/.utils/*" ! -wholename "*/UnityCrashHandler64.exe"
+          find ~/Games -name "*.exe" \
+              ! -wholename "*/drive_c/*" \
+              ! -wholename "*/umu/*" \
+              ! -wholename "*/.utils/*" \
+              ! -name "UnityCrashHandler64.exe"
       )
     }
 fi
