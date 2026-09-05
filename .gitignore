@@ -3,13 +3,11 @@
 !.gitignore
 !README.md
 
-!foot/**/*
+!ghostty/**/*
 !helix/**/*
 helix/runtime
 !most/**/*
 !starship/*
-!sway/**/*
-!waybar/**/*
 !yazi/**/*
 !zsh/**/*
 zsh/.zcompdump

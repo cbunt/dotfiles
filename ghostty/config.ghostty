@@ -1,0 +1,31 @@
+theme = CMYK Deep
+palette-generate = true
+
+font-family = "0xProto Nerd Font"
+font-size = 16
+font-variation = wght=500
+
+window-padding-x = 12
+window-padding-y = 12,0
+window-padding-color = extend
+window-padding-balance = true
+
+keybind = performable:ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+v=paste_from_clipboard  
+
+keybind = ctrl+space>d=close_surface
+keybind = ctrl+space>arrow_down=new_split:down
+keybind = ctrl+space>arrow_up=new_split:up
+keybind = ctrl+space>arrow_left=new_split:left
+keybind = ctrl+space>arrow_right=new_split:right
+keybind = ctrl+space>,=reload_config
+keybind = ctrl+space>[=goto_split:previous
+keybind = ctrl+space>]=goto_split:next
+keybind = ctrl+space>t=new_tab
+keybind = ctrl+space>w=new_window
+keybind = ctrl+space>f=start_search
+
+shell-integration = zsh
+window-save-state = always
+scrollbar = never
+unfocused-split-opacity  = 1
