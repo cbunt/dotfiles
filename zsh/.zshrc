@@ -61,6 +61,10 @@ elif [ -x "$(command -v hx)"]; then
     export EDITOR=hx
 fi
 
+if [ -x "$(command -v ghostty)" ]; then
+    export TERMINAL=ghostty
+fi
+
 # external utilities
 if [ -x "$(command -v yazi)" ]; then
     yy() {
