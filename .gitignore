@@ -3,6 +3,7 @@
 !.gitignore
 !README.md
 
+!fuzzel/**/*
 !ghostty/**/*
 !helix/**/*
 helix/runtime
