@@ -1,6 +1,5 @@
 # dumb term config
-if [[ "$TERM" == "dumb" ]]
-then
+if [[ "$TERM" == "dumb" ]]; then
     unsetopt zle
     unsetopt prompt_cr
     unsetopt prompt_subst
@@ -30,9 +29,8 @@ else
 fi
 
 # completions
-# zstyle ':completion:*:matches'         group 'yes'
-# zstyle ':completion:*'                 group-name ''
-zstyle ':completion:*' menu select
+zstyle ':completion:*' menu no
+zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' list-dirs-first true
 
@@ -81,8 +79,7 @@ fi
 if [ -x "$(command -v fzf)" ]; then
     source <(fzf --zsh)
 
-    export FZF_COMPLETION_TRIGGER=''
-    bindkey '^t' fzf-completion
+    export FZF_COMPLETION_TRIGGER='**'
 
     export FZF_DEFAULT_OPTS=$'--style=minimal
       --padding=1
@@ -94,6 +91,9 @@ if [ -x "$(command -v fzf)" ]; then
       --color=gutter:#4b5263'
     
     export FZF_COMPLETION_OPTS=$FZF_DEFAULT_OPTS
+    source $ZSH_PLUGIN_DIR/fzf-tab/fzf-tab.plugin.zsh
+    zstyle ':fzf-tab:*' use-fzf-default-opts yes
+    zstyle ':fzf-tab:*' switch-group '<' '>'
       
     _fzf_complete_umu-run() {
       _fzf_complete -- "$@" < <(
@@ -104,12 +104,6 @@ if [ -x "$(command -v fzf)" ]; then
               ! -name "UnityCrashHandler64.exe"
       )
     }
-
-    source $ZSH_PLUGIN_DIR/fzf-tab/fzf-tab.plugin.zsh
-    zstyle ':fzf-tab:*' use-fzf-default-opts yes
-
-    export FZF_COMPLETION_TRIGGER='**'
-    bindkey '^t' fzf-completion
 fi
 
 if [ -x "$(command -v umu-run)" ]; then
