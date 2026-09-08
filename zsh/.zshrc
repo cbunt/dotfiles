@@ -41,7 +41,7 @@ compinit
 setopt globdots
 
 # starship
-if [ ! $(tty | grep tty) ] && [ -x "$(command -v starship)" ]; then
+if [ -x "$(command -v starship)" ]; then
     export STARSHIP_CONFIG=~/.config/starship/starship.toml
     eval "$(starship init zsh)"
     source $ZDOTDIR/starship-transient.zsh
@@ -55,7 +55,7 @@ fi
 if [ -x "$(command -v helix)" ]; then
     export EDITOR=helix
     alias hx=helix
-elif [ -x "$(command -v hx)"]; then
+elif [ -x "$(command -v hx)" ]; then
     export EDITOR=hx
 fi
 
@@ -79,8 +79,6 @@ fi
 if [ -x "$(command -v fzf)" ]; then
     source <(fzf --zsh)
 
-    export FZF_COMPLETION_TRIGGER='**'
-
     export FZF_DEFAULT_OPTS=$'--style=minimal
       --padding=1
       --info=inline
@@ -91,10 +89,17 @@ if [ -x "$(command -v fzf)" ]; then
       --color=gutter:#4b5263'
     
     export FZF_COMPLETION_OPTS=$FZF_DEFAULT_OPTS
-    source $ZSH_PLUGIN_DIR/fzf-tab/fzf-tab.plugin.zsh
+    export FZF_COMPLETION_TRIGGER='**'
+
+    if [[ -e "$ZSH_PLUGIN_DIR/fzf-tab/fzf-tab.plugin.zsh" ]]; then
+        source $ZSH_PLUGIN_DIR/fzf-tab/fzf-tab.plugin.zsh
+    elif [[ -e "$ZSH_PLUGIN_DIR/fzf-tab/fzf-tab.zsh" ]]; then
+        source $ZSH_PLUGIN_DIR/fzf-tab/fzf-tab.zsh
+    fi
+      
     zstyle ':fzf-tab:*' use-fzf-default-opts yes
     zstyle ':fzf-tab:*' switch-group '<' '>'
-      
+
     _fzf_complete_umu-run() {
       _fzf_complete -- "$@" < <(
           find ~/Games -name "*.exe" \
@@ -111,6 +116,11 @@ if [ -x "$(command -v umu-run)" ]; then
         local app=$1
         local type=${app#*.}
 
+        if [[ ! ( -f $app ) ]]; then
+            echo "error: file does not exist"
+            return
+        fi
+
         if [[ $type != "exe" ]]; then;
             echo "error: invalid file type \"${type}\""
             return
@@ -118,21 +128,12 @@ if [ -x "$(command -v umu-run)" ]; then
 
         local abs_path=$(realpath "$app")
         local name=${${app:0:(-4)}##*/}
-
-        if [[ ! ( -f $abs_path ) ]]; then
-            echo "error: file does not exist"
-            return
-        fi
-
         local shortcut=$(realpath ~/.local/share/applications/"$name".desktop)
 
         if [[ -f $shortcut ]]; then
             echo "error: desktop file already exists"
             return
         fi
-
-        local icon=$(realpath ~/.local/share/applications/icons/"$name".ico)
-        icoextract $abs_path $icon
 
         cat << EOF > $shortcut
 [Desktop Entry]
@@ -142,6 +143,12 @@ Name=${name}
 Type=Application
 Icon=${icon}
 EOF
+
+        if [ -x "$(command -v icoextract)" ]; then
+            local icon=$(realpath ~/.local/share/applications/icons/"$name".ico)
+            icoextract $abs_path $icon
+            echo "Icon=${icon}" > $shortcut
+        fi
     }
 fi
 
@@ -161,8 +168,13 @@ bindkey "^[J" down-line-or-history
 bindkey "^[K" up-line-or-history
 
 # aliases
+if [ -x "$(command -v gls)" ]; then
+    alias ls='gls -A --group --color=always'
+else
+    alias ls='ls -A --group --color=always'
+fi
+    
 alias clear='repeat $LINES-2 echo'
-alias ls='ls -A --group --color=always'
 alias pac='doas pacman'
 alias nosleep='kde-inhibit --power --screenSaver'
 
