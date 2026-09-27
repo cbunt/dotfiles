@@ -79,8 +79,6 @@ fi
 if [ -x "$(command -v fzf)" ]; then
     source <(fzf --zsh)
 
-    export FZF_COMPLETION_TRIGGER='**'
-
     export FZF_DEFAULT_OPTS=$'--style=minimal
       --padding=1
       --info=inline
@@ -104,6 +102,12 @@ if [ -x "$(command -v fzf)" ]; then
               ! -name "UnityCrashHandler64.exe"
       )
     }
+
+    # source $ZSH_PLUGIN_DIR/fzf-tab/fzf-tab.plugin.zsh
+    # zstyle ':fzf-tab:*' use-fzf-default-opts yes
+
+    # export FZF_COMPLETION_TRIGGER='**'
+    # bindkey '^t' fzf-completion
 fi
 
 if [ -x "$(command -v umu-run)" ]; then
