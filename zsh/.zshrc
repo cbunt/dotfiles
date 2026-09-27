@@ -109,6 +109,12 @@ if [ -x "$(command -v fzf)" ]; then
               ! -name "UnityCrashHandler64.exe"
       )
     }
+
+    # source $ZSH_PLUGIN_DIR/fzf-tab/fzf-tab.plugin.zsh
+    # zstyle ':fzf-tab:*' use-fzf-default-opts yes
+
+    # export FZF_COMPLETION_TRIGGER='**'
+    # bindkey '^t' fzf-completion
 fi
 
 if [ -x "$(command -v umu-run)" ]; then
@@ -177,6 +183,7 @@ fi
 alias clear='repeat $LINES-2 echo'
 alias pac='doas pacman'
 alias nosleep='kde-inhibit --power --screenSaver'
+alias doed="doas $EDITOR --config /home/cb/.config/helix/config.toml"
 
 # pnpm
 export PNPM_HOME="/home/cb/.local/share/pnpm"

@@ -1,8 +1,11 @@
 theme = CMYK Deep
 palette-generate = true
+cursor-style = block
+cursor-color = #f7f7f7
+adjust-cursor-thickness = 3
 
 font-family = "0xProto Nerd Font"
-font-size = 16
+font-size = 14
 font-variation = wght=500
 
 window-padding-x = 12
