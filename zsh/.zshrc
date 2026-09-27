@@ -165,6 +165,7 @@ alias clear='repeat $LINES-2 echo'
 alias ls='ls -A --group --color=always'
 alias pac='doas pacman'
 alias nosleep='kde-inhibit --power --screenSaver'
+alias doed="doas $EDITOR --config /home/cb/.config/helix/config.toml"
 
 # pnpm
 export PNPM_HOME="/home/cb/.local/share/pnpm"
