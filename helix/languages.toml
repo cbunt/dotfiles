@@ -1,3 +1,7 @@
+[language-server.codebook]
+command = "codebook-lsp"
+args = ["serve"]
+
 [language-server.eslint-lsp]
 command = "vscode-eslint-language-server"
 args = ["--stdio"]
@@ -17,6 +21,10 @@ packageManager = "pnpm"
 [language-server.eslint-lsp.config.codeAction]
 disableRuleComment = { enable = true, location = "separateLine" }
 showDocumentation = { enable = true }
+
+[[language]]
+name = "bash"
+language-servers = [ "bash-language-server", "codebook" ]
 
 [[language]]
 name = "javascript"
