@@ -2,9 +2,7 @@ add_newline = true
 
 format = """
 [](fg:blue)\
-[ ($username)](bg:blue)\
-[($hostname : )](fg:black bg:blue)\
-[$directory ](fg:black bg:blue)\
+[ $directory ](fg:black bg:blue)\
 [](fg:blue bg:14)\
 [$jobs](bg:14 fg:black)\
 [](fg:14 bg:13)\
@@ -26,7 +24,13 @@ $rust\
 [ $time](bg:8 fg:15)\
 $character\
 $fill\
-$cmd_duration 
+$cmd_duration\
+(\
+[](fg:8)\
+[ $username](bg:8)\
+[$hostname ](fg:15 bg:8)\
+[](fg:8)\
+)
  [~ ](fg:14)
 """
 
@@ -35,12 +39,17 @@ continuation_prompt = " [~ ](fg:14)"
 [profiles]
 short = """
 [](fg:blue)\
-[ ($username)](bg:blue)\
-[($hostname : )](fg:black bg:blue)\
-[$directory ](fg:black bg:blue)\
+[ $directory ](fg:black bg:blue)\
 [](fg:blue bg:8)\
 [ $time](fg:15 bg:8)\
-$character
+$character\
+$fill\
+(\
+[](fg:8)\
+[ $username](bg:8)\
+[$hostname ](fg:15 bg:8)\
+[](fg:8)\
+)
 """
 
 multi_short = """
@@ -151,9 +160,11 @@ time_format = "%-I:%m%P" # Hour:Minute Format
 format = '$time'
 
 [username]
-style_root = 'bold black'
-style_user = 'black'
+disabled = false
+style_root = 'bg:8 fg:bold 15'
+style_user = 'bg:8 fg:15'
 format = '[$user@]($style)'
 
 [hostname]
-format = '[$hostname]'
+format = '$hostname'
+disabled = false
