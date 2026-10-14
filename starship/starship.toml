@@ -2,7 +2,9 @@ add_newline = true
 
 format = """
 [](fg:blue)\
-[ $directory ](fg:black bg:blue)\
+[ ($username)](bg:blue)\
+[($hostname : )](fg:black bg:blue)\
+[$directory ](fg:black bg:blue)\
 [](fg:blue bg:14)\
 [$jobs](bg:14 fg:black)\
 [](fg:14 bg:13)\
@@ -33,7 +35,9 @@ continuation_prompt = " [~ ](fg:14)"
 [profiles]
 short = """
 [](fg:blue)\
-[ $directory ](bg:blue fg:black)\
+[ ($username)](bg:blue)\
+[($hostname : )](fg:black bg:blue)\
+[$directory ](fg:black bg:blue)\
 [](fg:blue bg:8)\
 [ $time](fg:15 bg:8)\
 $character
@@ -145,3 +149,11 @@ format = '[ $symbol ($version) ]($style)'
 disabled = false
 time_format = "%-I:%m%P" # Hour:Minute Format
 format = '$time'
+
+[username]
+style_root = 'bold black'
+style_user = 'black'
+format = '[$user@]($style)'
+
+[hostname]
+format = '[$hostname]'
